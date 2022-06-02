@@ -14,6 +14,7 @@ export default class InputField extends React.Component{
         <input class="inputField"
           placeholder="InputField"
         />
+        <button>Добавить</button>
       </div>
     )
   }

@@ -12,18 +12,16 @@ export default class Item extends React.Component{
     return(
       <div class="ItemWrapper">
         <div class="Item">
-          
-                <input type="Checkbox" class="CheckBox"/>
-             
-              
-                <div class="captionTask">
-                  <input value="Caption"/>
-                </div>
-              
-                <div class="delButton">
-                  <input type="button" value="X"/>
-                </div>
-            
+          <input type="Checkbox" class="CheckBox"/>
+            <div class="captionTask">
+              <input value="Caption"/>
+            </div>
+            <div class="delButton">
+              <input 
+                type="button" 
+                value="X"
+              />
+            </div>
         </div>
       </div>
     )
