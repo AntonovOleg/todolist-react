@@ -9,8 +9,10 @@ export default class Item extends React.Component {
             type="Checkbox"
             className="CheckBox"
             checked={this.props.isDone}
-            //постоянно вызывается!!!!
-            // onChange={this.props.funcChecked(this.props.todos.id)}
+            
+            //changed
+             onChange={()=>this.props.funcChecked(this.props.todos.id)}
+             
           />
           <div className="captionTask">
             <div>{this.props.todos.todo}</div>
