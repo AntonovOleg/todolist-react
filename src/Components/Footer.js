@@ -9,7 +9,7 @@ export default class Footer extends React.Component {
   render() {
     return (
       <div className="footer">
-        <div className="counter">3 items left</div>
+        <div className="counter">{this.props.lengthCount} items left</div>
         <div className="filterAll filterSelected">All</div>
         <div className="filterActive">Active</div>
         <div className="filterCompleted">Completed</div>

@@ -71,31 +71,37 @@
 
 .footer{
   border:1px solid blue;
-  min-height: 50px;
+  min-height: 38px;
 }
 
 .counter{
   margin:10px;
+  display:inline-block;
 }
 
 .filterAll{
   padding:10px;
+  display:inline-block;
 }
 
 .filterActive{
   padding:10px;
+  display:inline-block;
 }
 
 .filterCompleted{
   padding:10px;
+  display:inline-block;
 }
 
 .filterSelected{
   background-color: lime;
+  display:inline-block;
 }
 
 .clearAll{
   padding:10px;
+  display:inline-block;
 }
 
 tr{
@@ -106,3 +112,6 @@ td{
   border: 1px solid gray;
 }
 
+.grayColor{
+  color:gray;
+}

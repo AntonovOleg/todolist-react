@@ -48,6 +48,8 @@ export default class Main extends React.Component {
     console.log(this.state.todos);
   };
 
+ 
+
   render() {
     return (
       <div className="wrapper">
@@ -58,7 +60,7 @@ export default class Main extends React.Component {
             funcDel={this.delItem}
             funcChecked={this.checked}
           />
-          <Footer />
+          <Footer lengthCount={this.state.todos.length}/>
         </div>
       </div>
     );
