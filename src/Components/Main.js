@@ -8,6 +8,7 @@ export default class Main extends React.Component {
     super(props);
     this.state = {
       todos: [],
+      filterMode: "All",
     };
   }
 
@@ -16,7 +17,7 @@ export default class Main extends React.Component {
       const newTodo = {
         todo,
         isDone: false,
-        id: this.state.todos.length,
+        id: Math.random()
       };
 
       return {
@@ -38,17 +39,32 @@ export default class Main extends React.Component {
         let tmp;
         if (curr.id === id) {
           tmp = curr;
-          tmp.isDone = !tmp.isDone;  
-        } else{
+          tmp.isDone = !tmp.isDone;
+        } else {
           tmp = curr;
         }
         return tmp;
       }),
     });
-    console.log(this.state.todos);
   };
 
- 
+  updateFilterMode = (filterMode) => {
+    this.setState({ filterMode: filterMode });
+  };
+
+  clearCompleted = () => {
+    this.setState(
+      {
+        todos: this.state.todos.filter((task) => {
+          let tmp;
+          if(task.isDone){
+            return;
+          } else {
+            return task
+          }
+        })
+      })
+  };
 
   render() {
     return (
@@ -59,8 +75,15 @@ export default class Main extends React.Component {
             todo={this.state.todos}
             funcDel={this.delItem}
             funcChecked={this.checked}
+            filter={this.state.filterMode}
           />
-          <Footer lengthCount={this.state.todos.length}/>
+          <Footer
+            lengthCount={this.state.todos.length}
+            funcUpdateFilterMode={this.updateFilterMode}
+            funcClearCompleted={this.clearCompleted}
+            filterMode={this.state.filterMode}
+            todos = {this.state.todos}
+          />
         </div>
       </div>
     );

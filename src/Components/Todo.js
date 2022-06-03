@@ -4,12 +4,12 @@ export default class Item extends React.Component {
   render() {
     let elem = "";
     return (
-      <div className="ItemWrapper">
-        <div className="Item">
+      <div className="itemWrapper">
+        <div className="item">
           <div className="inputWrapper">
             <input
               type="Checkbox"
-              className="CheckBox"
+              className="checkBox"
               checked={this.props.isDone}
               onChange={() => this.props.funcChecked(this.props.todos.id)}
             />
@@ -17,7 +17,7 @@ export default class Item extends React.Component {
           <div className="captionTask">
             {this.props.todos.isDone ? (
               (elem = (
-                <div className = "grayColor">
+                <div className="grayColor">
                   <strike>{this.props.todos.todo}</strike>
                 </div>
               ))

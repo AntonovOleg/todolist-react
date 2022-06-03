@@ -8,11 +8,17 @@ export default class InputField extends React.Component {
     };
   }
 
-  click(v) {
-    this.props.func(v);
+  click = (v) => {
+    if(v){
+      this.props.func(v);
+      this.setState({value: ""})
+    }
+    else{
+      alert("Введите наименование");
+    }
   }
 
-  change(v) {
+  change = (v) => {
     this.setState({ value: v });
   }
 
@@ -23,8 +29,9 @@ export default class InputField extends React.Component {
           className="inputField"
           placeholder="InputField"
           onChange={(e) => this.change(e.target.value)}
+          value={this.state.value}
         />
-        <button onClick={() => this.props.func(this.state.value)}>
+        <button onClick={() => this.click(this.state.value)}>
           Добавить
         </button>
       </div>
