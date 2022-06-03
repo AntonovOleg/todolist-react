@@ -35,13 +35,17 @@ export default class Main extends React.Component {
   checked = (id) => {
     this.setState({
       todos: this.state.todos.filter((curr) => {
+        let tmp;
         if (curr.id === id) {
-          let tmp = curr;
-          tmp.isDone = !tmp.isDone;
-          return tmp;
+          tmp = curr;
+          tmp.isDone = !tmp.isDone;  
+        } else{
+          tmp = curr;
         }
+        return tmp;
       }),
     });
+    console.log(this.state.todos);
   };
 
   render() {

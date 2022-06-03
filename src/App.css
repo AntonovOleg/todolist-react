@@ -62,7 +62,11 @@
 }
 
 .delButton{
+  float:right;
+}
 
+.inputWrapper{
+  float:left;
 }
 
 .footer{

@@ -5,12 +5,16 @@ export default class Item extends React.Component {
     return (
       <div className="ItemWrapper">
         <div className="Item">
-          <input
-            type="Checkbox"
-            className="CheckBox"
-            checked={this.props.isDone}
-             onChange={()=>this.props.funcChecked(this.props.todos.id)}  
-          />
+          <div className="inputWrapper">
+            <input
+              type="Checkbox"
+              className="CheckBox"
+              checked={this.props.isDone}
+
+              onChange={()=>this.props.funcChecked(this.props.todos.id)}  
+              
+            />
+          </div>
           <div className="captionTask">
             <div>{this.props.todos.todo}</div>
           </div>
