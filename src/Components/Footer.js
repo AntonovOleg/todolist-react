@@ -2,44 +2,48 @@ import React from "react";
 
 export default class Footer extends React.Component {
   clickAll = () => {
-    return this.props.funcUpdateFilterMode("All");
-  }
+    this.props.funcUpdateFilterMode("All");
+  };
 
   clickActive = () => {
     this.props.funcUpdateFilterMode("Active");
-  }
+  };
 
   clickCompleted = () => {
-    return this.props.funcUpdateFilterMode("Completed");
-  }
+    this.props.funcUpdateFilterMode("Completed");
+  };
 
   clickClearCompleted = () => {
-    return this.props.funcClearCompleted();
-  }
+    this.props.funcClearCompleted();
+  };
 
   getCount = () => {
-    if(this.props.filterMode === "All"){
-      return this.props.lengthCount;
-    } else if (this.props.filterMode === "Active"){
-      return this.props.todos.filter((curr) => {
-        if(!curr.isDone){
-          return curr
-        }else{
-          return
-        } 
-      }).length
-    } else if (this.props.filterMode === "Completed"){
-      return this.props.todos.filter((curr) => {
-        if(curr.isDone){
-          return curr
-        }else{
-          return
+    const { filterMode, lengthCount, todos } = this.props;
+
+    if (filterMode === "All") {
+      return lengthCount;
+    } else if (filterMode === "Active") {
+      return todos.filter((curr) => {
+        if (!curr.isDone) {
+          return curr;
+        } else {
+          return;
         }
-      }).length
+      }).length;
+    } else if (filterMode === "Completed") {
+      return todos.filter((curr) => {
+        if (curr.isDone) {
+          return curr;
+        } else {
+          return;
+        }
+      }).length;
     }
-  }
+  };
 
   render() {
+    const filterMode = this.props.filterMode;
+
     return (
       <div className="footer">
         <div className="counter">{this.getCount()} items left</div>
@@ -47,9 +51,7 @@ export default class Footer extends React.Component {
         {/* FilterAllButton */}
         <div
           className={
-            this.props.filterMode === "All"
-              ? "filterAll filterSelected"
-              : "filterAll"
+            filterMode === "All" ? "filterAll filterSelected" : "filterAll"
           }
           onClick={this.clickAll}
         >
@@ -59,7 +61,7 @@ export default class Footer extends React.Component {
         {/* FilterActiveButton */}
         <div
           className={
-            this.props.filterMode === "Active"
+            filterMode === "Active"
               ? "filterActive filterSelected"
               : "filterActive"
           }
@@ -71,7 +73,7 @@ export default class Footer extends React.Component {
         {/* FilterCompletedButton */}
         <div
           className={
-            this.props.filterMode === "Completed"
+            filterMode === "Completed"
               ? "filterCompleted filterSelected"
               : "filterCompleted"
           }

@@ -17,7 +17,7 @@ export default class Main extends React.Component {
       const newTodo = {
         todo,
         isDone: false,
-        id: Math.random()
+        id: Math.random(),
       };
 
       return {
@@ -35,15 +35,9 @@ export default class Main extends React.Component {
 
   checked = (id) => {
     this.setState({
-      todos: this.state.todos.filter((curr) => {
-        let tmp;
-        if (curr.id === id) {
-          tmp = curr;
-          tmp.isDone = !tmp.isDone;
-        } else {
-          tmp = curr;
-        }
-        return tmp;
+      todos: this.state.todos.map((curr) => {
+        if (curr.id === id) curr.isDone = !curr.isDone;
+        return curr;
       }),
     });
   };
@@ -53,36 +47,36 @@ export default class Main extends React.Component {
   };
 
   clearCompleted = () => {
-    this.setState(
-      {
-        todos: this.state.todos.filter((task) => {
-          let tmp;
-          if(task.isDone){
-            return;
-          } else {
-            return task
-          }
-        })
-      })
+    this.setState({
+      todos: this.state.todos.filter((task) => {
+        if (task.isDone) {
+          return;
+        } else {
+          return task;
+        }
+      }),
+    });
   };
 
   render() {
+    const { todos, filterMode } = this.state;
+
     return (
       <div className="wrapper">
         <div className="container">
-          <InputField func={this.addTodo} />
+          <InputField funcAddNewTodo={this.addTodo} />
           <Todos
-            todo={this.state.todos}
+            todo={todos}
             funcDel={this.delItem}
             funcChecked={this.checked}
-            filter={this.state.filterMode}
+            filter={filterMode}
           />
           <Footer
-            lengthCount={this.state.todos.length}
+            lengthCount={todos.length}
             funcUpdateFilterMode={this.updateFilterMode}
             funcClearCompleted={this.clearCompleted}
-            filterMode={this.state.filterMode}
-            todos = {this.state.todos}
+            filterMode={filterMode}
+            todos={todos}
           />
         </div>
       </div>

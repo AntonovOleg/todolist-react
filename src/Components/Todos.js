@@ -1,35 +1,29 @@
 import React from "react";
 import Item from "./Todo.js";
-
 export default class Todos extends React.Component {
   checkFilter = (isDone, item) => {
+    const elem = (
+      <Item
+        todos={item}
+        key={item.id}
+        funcDel={this.props.funcDel}
+        funcChecked={this.props.funcChecked}
+        isDone={item.isDone}
+      />
+    );
 
-    const elem = <Item
-      todos={item}
-      key={item.id}
-      funcDel={this.props.funcDel}
-      funcChecked={this.props.funcChecked}
-      isDone={item.isDone}
-    />
-
-    switch (this.props.filter){
+    switch (this.props.filter) {
       case "All":
-        return (
-          elem
-        );
+        return elem;
         break;
       case "Active":
-        if(!isDone){
-          return (
-            elem
-          );
+        if (!isDone) {
+          return elem;
         }
         break;
       case "Completed":
-        if(isDone){
-          return (
-            elem
-          );
+        if (isDone) {
+          return elem;
         }
         break;
       default:
@@ -41,7 +35,7 @@ export default class Todos extends React.Component {
   render() {
     const writer = () => {
       return this.props.todo.map((item) => (
-        <div key={item.id}>
+        <div key={item.id} className="flexRow">
           {this.checkFilter(item.isDone, item)}
         </div>
       ));
