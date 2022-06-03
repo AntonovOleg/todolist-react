@@ -8,29 +8,52 @@ export default class Main extends React.Component {
     super(props);
     this.state = {
       todos: [],
-      etew: 0
     };
   }
 
   addTodo = (todo) => {
-    this.setState((prevState) => ({
-      ...prevState,
-      todos: this.state.todos.push({
-        todo: todo,
+    this.setState((prevState) => {
+      const newTodo = {
+        todo,
         isDone: false,
-        id: this.state.todos.length()
-    })
-    }))
-  }
+        id: this.state.todos.length,
+      };
 
+      return {
+        ...prevState,
+        todos: [...prevState.todos, newTodo],
+      };
+    });
+  };
 
+  delItem = (id) => {
+    this.setState({
+      todos: this.state.todos.filter((curr) => curr.id !== id),
+    });
+  };
+
+  checked = (id) => {
+    this.setState({
+      todos: this.state.todos.filter((curr) => {
+        if (curr.id === id) {
+          let tmp = curr;
+          tmp.isDone = !tmp.isDone;
+          return tmp;
+        }
+      }),
+    });
+  };
 
   render() {
     return (
-      <div class="wrapper">
-        <div class="container">
-          <InputField />
-          <Todos />
+      <div className="wrapper">
+        <div className="container">
+          <InputField func={this.addTodo} />
+          <Todos
+            todo={this.state.todos}
+            funcDel={this.delItem}
+            funcChecked={this.checked}
+          />
           <Footer />
         </div>
       </div>

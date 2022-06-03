@@ -8,26 +8,12 @@ export default class Footer extends React.Component {
 
   render() {
     return (
-      <div class="footer">
-        
-              <div class="counter">3 items left</div>
-            
-              <div class="filterAll filterSelected">
-                All
-              </div>
-            
-              <div class="filterActive">
-                Active
-              </div>
-            
-              <div class="filterCompleted">
-                Completed
-              </div>
-            
-              <div class="clearAll">
-                ClearCompleted
-              </div>
-            
+      <div className="footer">
+        <div className="counter">3 items left</div>
+        <div className="filterAll filterSelected">All</div>
+        <div className="filterActive">Active</div>
+        <div className="filterCompleted">Completed</div>
+        <div className="clearAll">ClearCompleted</div>
       </div>
     );
   }
