@@ -5,7 +5,6 @@ export default class InputField extends React.Component {
     super(props);
     this.state = {
       value: "",
-      // checkBoxSelectAll: false
     };
   }
 
@@ -28,9 +27,9 @@ export default class InputField extends React.Component {
   }
 
   renderCheckBoxSelectAll = () => {
-    return (this.props.isEmpty?null:<input type="checkbox" className="selectAll" onChange={(e) => this.changeCheckBoxSelectAll()}  
-    checked={this.props.selectAllFlag}
-  />)
+    return (this.props.isEmpty ? null : <input type="checkbox" className="selectAll" onChange={(e) => this.changeCheckBoxSelectAll()}
+      checked={this.props.selectAllFlag}
+    />)
   }
 
   render() {
@@ -39,7 +38,7 @@ export default class InputField extends React.Component {
     return (
       <div className="inputFieldWrapper">
         {this.renderCheckBoxSelectAll()}
-        
+
         <input
           className="inputField"
           placeholder="Enter task and press Enter"

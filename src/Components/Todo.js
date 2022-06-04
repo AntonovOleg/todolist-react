@@ -1,44 +1,44 @@
 import React from "react";
 
 export default class Item extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-      mouseIn : false
+      mouseIn: false
     }
   }
 
   mouseIn = () => {
-    this.setState({mouseIn: true});
+    this.setState({ mouseIn: true });
   }
-  
+
   mouseOut = () => {
-    this.setState({mouseIn: false});
+    this.setState({ mouseIn: false });
   }
 
   renderDelButton = () => {
-    const {funcDel, todos} = this.props;
+    const { funcDel, todos } = this.props;
 
     return (
       <div className="delButton">
-        <div className={this.state.mouseIn?"buttonVisible":"buttonHidden"}>
-        <button onClick={() => funcDel(todos.id)}
-          onMouseOut={this.mouseOut} 
-          onMouseEnter={this.mouseIn}
-        >X</button>
+        <div className={this.state.mouseIn ? "buttonVisible" : "buttonHidden"}>
+          <button onClick={() => funcDel(todos.id)}
+            onMouseOut={this.mouseOut}
+            onMouseEnter={this.mouseIn}
+          >X</button>
         </div>
       </div>
-  )
+    )
   }
 
   render() {
     const { isDone, funcChecked, todos, funcDel } = this.props;
 
-    
+
 
     return (
-      <div className="itemWrapper" 
-        onMouseOut={this.mouseOut} 
+      <div className="itemWrapper"
+        onMouseOut={this.mouseOut}
         onMouseEnter={this.mouseIn}
       >
         <div className="item">
@@ -50,14 +50,14 @@ export default class Item extends React.Component {
               onChange={() => funcChecked(todos.id)}
             />
           </div>
-          <div className="captionTask" 
-            onMouseOut={this.mouseOut} 
+          <div className="captionTask"
+            onMouseOut={this.mouseOut}
             onMouseEnter={this.mouseIn}
             onClick={() => funcChecked(todos.id)}
           >
             {todos.isDone ? (
               <div className="grayColor"
-                onMouseOut={this.mouseOut} 
+                onMouseOut={this.mouseOut}
                 onMouseEnter={this.mouseIn}
               >
                 <strike>{todos.todo}</strike>

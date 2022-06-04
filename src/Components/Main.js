@@ -16,10 +16,10 @@ export default class Main extends React.Component {
   }
 
   changeSelectAllFlag = (newValue) => {
-    this.setState({selectAll: newValue});
+    this.setState({ selectAll: newValue });
     this.setState({
-      todos:this.state.todos.map((todo)=>{
-        todo.isDone=newValue;
+      todos: this.state.todos.map((todo) => {
+        todo.isDone = newValue;
         return todo;
       })
     })
@@ -39,22 +39,24 @@ export default class Main extends React.Component {
         todos: [...prevState.todos, newTodo],
       };
     });
-    this.setState({isEmpty:false});
+    this.setState({ isEmpty: false });
     this.updateVisibleButtonClearAll();
   };
 
   delItem = (id) => {
+    const { todos } = this.state;
+
     this.setState({
-      todos: this.state.todos.filter((curr) => curr.id !== id),
+      todos: todos.filter((curr) => curr.id !== id),
     });
-    console.log(this.state.todos.length);
-    if(this.state.todos.length===1){
-      this.setState({isEmpty:true});
-      this.setState({selectAll:false});
+    console.log(todos.length);
+    if (todos.length === 1) {
+      this.setState({ isEmpty: true });
+      this.setState({ selectAll: false });
     }
     //если выполнять сразу, то текущие states не успевают обновиться и 
     //  updater работает с устаревшими параметрами
-    setTimeout(()=>this.updateVisibleButtonClearAll(),300);
+    setTimeout(() => this.updateVisibleButtonClearAll(), 300);
   };
 
   checked = (id) => {
@@ -71,6 +73,12 @@ export default class Main extends React.Component {
     this.setState({ filterMode: filterMode });
   };
 
+  updateVisibleCheckBoxSelectAll = () => {
+    if (this.state.todos.length > 0) {
+
+    }
+  }
+
   clearCompleted = () => {
     this.setState({
       todos: this.state.todos.filter((task) => {
@@ -81,40 +89,40 @@ export default class Main extends React.Component {
         }
       }),
     });
-    this.setState({selectAll:false});
-    this.setState({isEmpty: true});
+    this.setState({ selectAll: false });
+    this.setState({ isEmpty: true });
     this.updateVisibleButtonClearAll();
-    
+
     //если выполнять сразу, то текущие states не успевают обновиться и 
     //  updater работает с устаревшими параметрами
-    setTimeout(()=>this.updateVisibleButtonClearAll(),300);
+    setTimeout(() => this.updateVisibleButtonClearAll(), 300);
   };
 
   changeIsEmpty = (newState) => {
-    this.setState({isEmpty:newState})
+    this.setState({ isEmpty: newState })
   }
 
   updateVisibleButtonClearAll = () => {
-    if(this.state.todos.filter((todo)=>todo.isDone).length===0){
-      this.setState({visibleButtonClearAll:false});
+    if (this.state.todos.filter((todo) => todo.isDone).length === 0) {
+      this.setState({ visibleButtonClearAll: false });
     }
-    else{
-      this.setState({visibleButtonClearAll:true});
+    else {
+      this.setState({ visibleButtonClearAll: true });
     }
   }
 
   render() {
-    const { todos, filterMode, visibleButtonClearAll } = this.state;
+    const { todos, filterMode, visibleButtonClearAll, selectAll, isEmpty } = this.state;
 
     return (
       <div className="wrapper">
         <div className="container">
-          <InputField 
-            funcAddNewTodo={this.addTodo} 
-            changeSelectAllFlag={this.changeSelectAllFlag} 
-            isEmpty={this.state.isEmpty} 
-            changeIsEmpty={this.changeIsEmpty} 
-            selectAllFlag={this.state.selectAll} 
+          <InputField
+            funcAddNewTodo={this.addTodo}
+            changeSelectAllFlag={this.changeSelectAllFlag}
+            isEmpty={isEmpty}
+            changeIsEmpty={this.changeIsEmpty}
+            selectAllFlag={selectAll}
           />
           <Todos
             todo={todos}

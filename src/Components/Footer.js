@@ -20,41 +20,38 @@ export default class Footer extends React.Component {
   getCount = () => {
     const { filterMode, lengthCount, todos } = this.props;
 
-    if (filterMode === "All") {
-      return lengthCount;
-    } else if (filterMode === "Active") {
-      return todos.filter((curr) => {
-        if (!curr.isDone) {
-          return curr;
-        } else {
-          return;
-        }
-      }).length;
-    } else if (filterMode === "Completed") {
-      return todos.filter((curr) => {
-        if (curr.isDone) {
-          return curr;
-        } else {
-          return;
-        }
-      }).length;
+    switch (filterMode) {
+      case "All":
+        return lengthCount;
+        break;
+      case "Active":
+        return todos.filter((curr) => {
+          if (!curr.isDone) {
+            return curr;
+          } else {
+            return;
+          }
+        }).length;
+        break;
+      case "Completed":
+        return todos.filter((curr) => {
+          if (curr.isDone) {
+            return curr;
+          } else {
+            return;
+          }
+        }).length;
+        break;
+      default:
+        alert("Непредвиденная ошибка");
+        break;
     }
   };
 
   renderButtonClearCompleted = () => {
-    let currentClassName=`clearCompleted footerButton ${this.props.visibleButtonClear?"":"hidden"}`;
-    console.log(currentClassName);
-    let elem=<div className={currentClassName} onClick={this.clickClearCompleted}>ClearCompleted</div>
-    console.log(elem);
-  //   return (
-  //       // <div className="clearCompleted footerButton" onClick={this.clickClearCompleted}>
-  //         {elem}
-  //         /* {this.props.visibleButtonClear?<div className="visible">ClearCompleted</div>:<div className="hidden">ClearCompleted</div>}
-  //           ClearCompleted */
-  //       // </div>
-
-  // )
-  return elem;
+    let currentClassName = `clearCompleted footerButton ${this.props.visibleButtonClear ? "visible" : "hidden"}`;
+    let elem = <div className={currentClassName} onClick={this.clickClearCompleted}>ClearCompleted</div>
+    return elem;
   }
 
   render() {
@@ -76,7 +73,7 @@ export default class Footer extends React.Component {
 
         {/* FilterActiveButton */}
         <div
-          className={ 
+          className={
             filterMode === "Active"
               ? "filterActive filterSelected footerButton"
               : "filterActive footerButton"

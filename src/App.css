@@ -68,7 +68,7 @@
   justify-content: center;
 }
 
-.captionTask > input {
+.captionTask>input {
   width: 100%;
 }
 
@@ -101,14 +101,6 @@
   padding: 10px;
   display: inline-block;
   cursor: pointer;
-}
-
-.filterActive {
-
-}
-
-.filterCompleted {
-  
 }
 
 .filterSelected {
