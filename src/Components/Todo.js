@@ -34,8 +34,6 @@ export default class Item extends React.Component {
   render() {
     const { isDone, funcChecked, todos, funcDel } = this.props;
 
-
-
     return (
       <div className="itemWrapper"
         onMouseOut={this.mouseOut}

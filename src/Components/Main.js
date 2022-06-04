@@ -11,7 +11,8 @@ export default class Main extends React.Component {
       filterMode: "All",
       selectAll: false,
       isEmpty: true,
-      visibleButtonClearAll: false
+      visibleButtonClearAll: false,
+      visibleCheckBoxSelectAll: false
     };
   }
 
@@ -24,6 +25,7 @@ export default class Main extends React.Component {
       })
     })
     this.updateVisibleButtonClearAll();
+    this.updateVisibleCheckBoxSelectAll();
   }
 
   addTodo = (todo) => {
@@ -41,6 +43,7 @@ export default class Main extends React.Component {
     });
     this.setState({ isEmpty: false });
     this.updateVisibleButtonClearAll();
+    setTimeout(()=>this.updateVisibleCheckBoxSelectAll(),300);
   };
 
   delItem = (id) => {
@@ -57,6 +60,7 @@ export default class Main extends React.Component {
     //если выполнять сразу, то текущие states не успевают обновиться и 
     //  updater работает с устаревшими параметрами
     setTimeout(() => this.updateVisibleButtonClearAll(), 300);
+    setTimeout(() => this.updateVisibleCheckBoxSelectAll(), 300);
   };
 
   checked = (id) => {
@@ -75,7 +79,16 @@ export default class Main extends React.Component {
 
   updateVisibleCheckBoxSelectAll = () => {
     if (this.state.todos.length > 0) {
-
+      console.log("todos length",this.state.todos.length);
+      console.log("todos");
+      console.log(this.state.todos);
+      this.setState({visibleCheckBoxSelectAll:true});
+      console.log("visibleCheckboxSelectAll",this.state.visibleCheckBoxSelectAll);
+    }else{
+      console.log("todos length",this.state.todos.length);
+      console.log("todos");
+      console.log(this.state.todos);
+      this.setState({visibleCheckBoxSelectAll:false})
     }
   }
 
@@ -90,13 +103,14 @@ export default class Main extends React.Component {
       }),
     });
     this.setState({ selectAll: false });
-    setTimeout(() => this.state.todos.length >= 0 ? this.setState({ isEmpty: false }) : this.setState({ isEmpty: true }), 300);
-    this.setState({ isEmpty: true });
+    // setTimeout(() => this.state.todos.length >= 0 ? this.setState({ isEmpty: false }) : this.setState({ isEmpty: true }), 300);
+    // this.setState({ isEmpty: true });
     this.updateVisibleButtonClearAll();
 
     //если выполнять сразу, то текущие states не успевают обновиться и 
     //  updater работает с устаревшими параметрами
     setTimeout(() => this.updateVisibleButtonClearAll(), 300);
+    setTimeout(() => this.updateVisibleCheckBoxSelectAll(), 500);
   };
 
   changeIsEmpty = (newState) => {
@@ -124,6 +138,8 @@ export default class Main extends React.Component {
             isEmpty={isEmpty}
             changeIsEmpty={this.changeIsEmpty}
             selectAllFlag={selectAll}
+            visibleCheckBoxSelectAll={this.state.visibleCheckBoxSelectAll}
+            updateVisibleCheckBoxSelectAll={this.updateVisibleCheckBoxSelectAll}
           />
           <Todos
             todo={todos}
@@ -131,6 +147,7 @@ export default class Main extends React.Component {
             funcChecked={this.checked}
             filter={filterMode}
             updateVisibleButtonClearAll={this.updateVisibleButtonClearAll}
+            updateVisibleCheckBoxSelectAll={this.updateVisibleCheckBoxSelectAll}
           />
           <Footer
             lengthCount={todos.length}

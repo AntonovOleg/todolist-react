@@ -23,11 +23,11 @@ export default class InputField extends React.Component {
 
   changeCheckBoxSelectAll = () => {
     this.props.changeSelectAllFlag(!this.props.selectAllFlag);
-
+    this.props.updateVisibleCheckBoxSelectAll();
   }
 
   renderCheckBoxSelectAll = () => {
-    return (this.props.isEmpty ? null : <input type="checkbox" className="selectAll" onChange={(e) => this.changeCheckBoxSelectAll()}
+    return (!this.props.visibleCheckBoxSelectAll ? null : <input type="checkbox" className="selectAll" onChange={(e) => this.changeCheckBoxSelectAll()}
       checked={this.props.selectAllFlag}
     />)
   }
@@ -37,7 +37,7 @@ export default class InputField extends React.Component {
 
     return (
       <div className="inputFieldWrapper">
-        {this.renderCheckBoxSelectAll()}
+        {this.props.visibleCheckBoxSelectAll?this.renderCheckBoxSelectAll():null}
 
         <input
           className="inputField"

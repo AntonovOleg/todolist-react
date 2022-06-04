@@ -10,6 +10,7 @@ export default class Todos extends React.Component {
         funcChecked={this.props.funcChecked}
         isDone={item.isDone}
         updateVisibleButtonClearAll={this.props.updateVisibleButtonClearAll}
+        updateVisibleCheckBoxSelectAll={this.props.updateVisibleCheckBoxSelectAll}
       />
     );
 
