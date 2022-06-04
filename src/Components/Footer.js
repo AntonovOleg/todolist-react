@@ -20,32 +20,44 @@ export default class Footer extends React.Component {
   getCount = () => {
     const { filterMode, lengthCount, todos } = this.props;
 
-    switch (filterMode) {
-      case "All":
-        return lengthCount;
-        break;
-      case "Active":
-        return todos.filter((curr) => {
-          if (!curr.isDone) {
-            return curr;
-          } else {
-            return;
-          }
-        }).length;
-        break;
-      case "Completed":
-        return todos.filter((curr) => {
-          if (curr.isDone) {
-            return curr;
-          } else {
-            return;
-          }
-        }).length;
-        break;
-      default:
-        alert("Непредвиденная ошибка");
-        break;
-    }
+    // Новый режим, при котором отображается количество незавершенных заданий
+    return todos.filter((curr) => {
+            if (!curr.isDone) {
+              return curr;
+            } else {
+              return;
+            }
+          }).length;
+
+    // Преждний режим, при котором отображалось количесвто items 
+    //  при текущем фильтре
+
+    // switch (filterMode) {
+    //   case "All":
+    //     // return lengthCount;
+    //     // break;
+    //   case "Active":
+    //     return todos.filter((curr) => {
+    //       if (!curr.isDone) {
+    //         return curr;
+    //       } else {
+    //         return;
+    //       }
+    //     }).length;
+    //     break;
+    //   // case "Completed":
+    //   //   return todos.filter((curr) => {
+    //   //     if (curr.isDone) {
+    //   //       return curr;
+    //   //     } else {
+    //   //       return;
+    //   //     }
+    //   //   }).length;
+    //   //   break;
+    //   default:
+    //     alert("Непредвиденная ошибка");
+    //     break;
+    // }
   };
 
   renderButtonClearCompleted = () => {
