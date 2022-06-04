@@ -90,6 +90,7 @@ export default class Main extends React.Component {
       }),
     });
     this.setState({ selectAll: false });
+    setTimeout(() => this.state.todos.length >= 0 ? this.setState({ isEmpty: false }) : this.setState({ isEmpty: true }), 300);
     this.setState({ isEmpty: true });
     this.updateVisibleButtonClearAll();
 
