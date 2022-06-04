@@ -1,11 +1,49 @@
 import React from "react";
 
 export default class Item extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      mouseIn : false
+    }
+  }
+
+  mouseIn = () => {
+    // console.log('mouseIn');
+    this.setState({mouseIn: true});
+  }
+  
+  mouseOut = () => {
+    // console.log('mouseOut');
+    this.setState({mouseIn: false});
+  }
+
+  renderDelButton = () => {
+    const {funcDel, todos} = this.props;
+
+    console.log(this.state.mouseIn);
+    return (
+      <div className="delButton">
+        <div className={this.state.mouseIn?"buttonVisible":"buttonHidden"}>
+        <button onClick={() => funcDel(todos.id)}
+          onMouseOut={this.mouseOut} 
+          onMouseEnter={this.mouseIn}
+        >X</button>
+        </div>
+      </div>
+  )
+  }
+
   render() {
     const { isDone, funcChecked, todos, funcDel } = this.props;
 
+    
+
     return (
-      <div className="itemWrapper">
+      <div className="itemWrapper" 
+        onMouseOut={this.mouseOut} 
+        onMouseEnter={this.mouseIn}
+      >
         <div className="item">
           <div className="inputWrapper">
             <input
@@ -15,18 +53,23 @@ export default class Item extends React.Component {
               onChange={() => funcChecked(todos.id)}
             />
           </div>
-          <div className="captionTask" onClick={() => funcChecked(todos.id)}>
+          <div className="captionTask" 
+            onMouseOut={this.mouseOut} 
+            onMouseEnter={this.mouseIn}
+            onClick={() => funcChecked(todos.id)}
+          >
             {todos.isDone ? (
-              <div className="grayColor">
+              <div className="grayColor"
+                onMouseOut={this.mouseOut} 
+                onMouseEnter={this.mouseIn}
+              >
                 <strike>{todos.todo}</strike>
               </div>
             ) : (
               <div>{todos.todo}</div>
             )}
           </div>
-          <div className="delButton">
-            <button onClick={() => funcDel(todos.id)}>X</button>
-          </div>
+          {this.renderDelButton()}
         </div>
       </div>
     );

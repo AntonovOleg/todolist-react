@@ -60,10 +60,10 @@ export default class Footer extends React.Component {
 
         {/* FilterActiveButton */}
         <div
-          className={
+          className={ 
             filterMode === "Active"
-              ? "filterActive filterSelected"
-              : "filterActive"
+              ? "filterActive filterSelected footerButton"
+              : "filterActive footerButton"
           }
           onClick={this.clickActive}
         >
@@ -74,15 +74,15 @@ export default class Footer extends React.Component {
         <div
           className={
             filterMode === "Completed"
-              ? "filterCompleted filterSelected"
-              : "filterCompleted"
+              ? "filterCompleted filterSelected footerButton"
+              : "filterCompleted footerButton"
           }
           onClick={this.clickCompleted}
         >
           Completed
         </div>
 
-        <div className="clearCompleted" onClick={this.clickClearCompleted}>
+        <div className="clearCompleted footerButton" onClick={this.clickClearCompleted}>
           ClearCompleted
         </div>
       </div>
