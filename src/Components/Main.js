@@ -8,6 +8,7 @@ export default class Main extends React.Component {
     super(props);
     this.state = {
       todos: [],
+      filterMode: "All",
     };
   }
 
@@ -16,7 +17,7 @@ export default class Main extends React.Component {
       const newTodo = {
         todo,
         isDone: false,
-        id: this.state.todos.length,
+        id: Math.random(),
       };
 
       return {
@@ -34,27 +35,49 @@ export default class Main extends React.Component {
 
   checked = (id) => {
     this.setState({
-      todos: this.state.todos.filter((curr) => {
-        if (curr.id === id) {
-          let tmp = curr;
-          tmp.isDone = !tmp.isDone;
-          return tmp;
+      todos: this.state.todos.map((curr) => {
+        if (curr.id === id) curr.isDone = !curr.isDone;
+        return curr;
+      }),
+    });
+  };
+
+  updateFilterMode = (filterMode) => {
+    this.setState({ filterMode: filterMode });
+  };
+
+  clearCompleted = () => {
+    this.setState({
+      todos: this.state.todos.filter((task) => {
+        if (task.isDone) {
+          return;
+        } else {
+          return task;
         }
       }),
     });
   };
 
   render() {
+    const { todos, filterMode } = this.state;
+
     return (
       <div className="wrapper">
         <div className="container">
-          <InputField func={this.addTodo} />
+          <InputField funcAddNewTodo={this.addTodo} />
           <Todos
-            todo={this.state.todos}
+            todo={todos}
             funcDel={this.delItem}
             funcChecked={this.checked}
+            filter={filterMode}
           />
-          <Footer />
+          <Footer
+            lengthCount={todos.length}
+            funcUpdateFilterMode={this.updateFilterMode}
+            funcClearCompleted={this.clearCompleted}
+            filterMode={filterMode}
+            todos={todos}
+          />
         </div>
       </div>
     );

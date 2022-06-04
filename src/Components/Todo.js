@@ -2,22 +2,30 @@ import React from "react";
 
 export default class Item extends React.Component {
   render() {
+    const { isDone, funcChecked, todos, funcDel } = this.props;
+
     return (
-      <div className="ItemWrapper">
-        <div className="Item">
-          <input
-            type="Checkbox"
-            className="CheckBox"
-            checked={this.props.isDone}
-             onChange={()=>this.props.funcChecked(this.props.todos.id)}  
-          />
-          <div className="captionTask">
-            <div>{this.props.todos.todo}</div>
+      <div className="itemWrapper">
+        <div className="item">
+          <div className="inputWrapper">
+            <input
+              type="Checkbox"
+              className="checkBox"
+              checked={isDone}
+              onChange={() => funcChecked(todos.id)}
+            />
+          </div>
+          <div className="captionTask" onClick={() => funcChecked(todos.id)}>
+            {todos.isDone ? (
+              <div className="grayColor">
+                <strike>{todos.todo}</strike>
+              </div>
+            ) : (
+              <div>{todos.todo}</div>
+            )}
           </div>
           <div className="delButton">
-            <button onClick={() => this.props.funcDel(this.props.todos.id)}>
-              X
-            </button>
+            <button onClick={() => funcDel(todos.id)}>X</button>
           </div>
         </div>
       </div>

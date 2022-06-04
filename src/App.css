@@ -1,104 +1,140 @@
-.wrapper{
+.wrapper {
   background-color: rgb(167, 167, 167);
-  min-height: 500px;
+  min-height: 1000px;
 }
 
-.container{
+.container {
   background-color: rgb(0, 128, 21);
   width: 70%;
   margin: auto;
   min-height: 500px;
 }
 
-.inputFieldWrapper{
-  width: 70%;
-  margin:auto;
+.inputFieldWrapper {
+  width: 90%;
+  margin: auto;
+  text-align: center;
 }
 
-.inputField{
+.inputField {
   margin-top: 20px;
   width: 100%;
-  height:25px;
+  height: 25px;
+  text-align: center;
 }
 
-.todosWrapper{
-  margin-top:30px;
-  border:1px solid red;
+.btnAdd {
+  margin-top: 3px;
+}
+
+.todosWrapper {
+  margin-top: 30px;
+  border: 1px solid rgb(0, 39, 7);
   min-height: 400px;
+  display: flex;
+  flex-direction: column;
 }
 
-.todosUl{
-
+.flexRow {
+  flex-direction: row;
 }
 
-.ItemWrapper{
-  border:1px solid yellow;
-  min-height:50px;
-  margin-top:20px;
-  margin-right: 40px;
+.itemWrapper {
+  border: 1px solid yellow;
+  min-height: 50px;
+  margin: 10px 30px;
   background-color: rgb(99, 206, 0);
   vertical-align: middle;
+  display: flex;
 }
 
-
-.Item{
-  
+.captionTaskTd {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.Checkbox{
-  
+.captionTask {
+  padding: 15px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
 }
 
-.captionTaskTd{
- width: 100%;
-}
-
-.captionTask{
-  
-}
-
-.captionTask>input{
+.captionTask > input {
   width: 100%;
 }
 
-.delButton{
-
+.delButton {
+  margin: auto 5px;
+  display: flex;
+  flex-direction: column;
 }
 
-.footer{
-  border:1px solid blue;
-  min-height: 50px;
+.delButton button {
+  cursor: pointer;
 }
 
-.counter{
-  margin:10px;
+.inputWrapper {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: column;
 }
 
-.filterAll{
-  padding:10px;
+.footer {
+  min-height: 38px;
 }
 
-.filterActive{
-  padding:10px;
+.counter {
+  margin: 10px;
+  display: inline-block;
 }
 
-.filterCompleted{
-  padding:10px;
+.filterAll {
+  padding: 10px;
+  display: inline-block;
+  cursor: pointer;
 }
 
-.filterSelected{
+.filterActive {
+  padding: 10px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.filterCompleted {
+  padding: 10px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.filterSelected {
   background-color: lime;
+  display: inline-block;
+  transition: 0.5s;
 }
 
-.clearAll{
-  padding:10px;
+.clearCompleted {
+  padding: 10px;
+  display: inline-block;
+  background-color: rgba(255, 0, 0, 0.534);
+  cursor: pointer;
 }
 
-tr{
-  
+.grayColor {
+  color: gray;
+  transition: 0.5s;
 }
 
-td{
-  border: 1px solid gray;
+.item {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  cursor: pointer;
 }
 
+.checkBox {
+  transform: scale(1.5);
+  margin-left: 10px;
+  cursor: pointer;
+}

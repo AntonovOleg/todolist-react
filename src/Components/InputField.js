@@ -8,23 +8,34 @@ export default class InputField extends React.Component {
     };
   }
 
-  click(v) {
-    this.props.func(v);
-  }
+  click = (v) => {
+    if (v) {
+      this.props.funcAddNewTodo(v);
+      this.setState({ value: "" });
+    } else {
+      alert("Введите наименование");
+    }
+  };
 
-  change(v) {
+  change = (v) => {
     this.setState({ value: v });
-  }
+  };
 
   render() {
+    const value = this.state.value;
+
     return (
       <div className="inputFieldWrapper">
         <input
           className="inputField"
-          placeholder="InputField"
+          placeholder="Enter task and press Enter"
           onChange={(e) => this.change(e.target.value)}
+          value={value}
+          onKeyDown={(key) =>
+            key.keyCode === 13 ? this.click(this.state.value) : null
+          }
         />
-        <button onClick={() => this.props.func(this.state.value)}>
+        <button className="btnAdd" onClick={() => this.click(value)}>
           Добавить
         </button>
       </div>
