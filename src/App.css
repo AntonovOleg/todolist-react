@@ -154,3 +154,13 @@
   opacity: 100%;
   transition: 0.5s;
 }
+
+.checkBoxHidden {
+  opacity: 0%;
+  transition: 0.5s;
+}
+
+.checkBoxVisible {
+  opacity: 100%;
+  transition: 0.5s;
+}

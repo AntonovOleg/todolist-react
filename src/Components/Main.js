@@ -9,7 +9,19 @@ export default class Main extends React.Component {
     this.state = {
       todos: [],
       filterMode: "All",
+      selectAll: false,
+      isEmpty: true
     };
+  }
+
+  changeSelectAllFlag = (newValue) => {
+    this.setState({selectAll: newValue});
+    this.setState({
+      todos:this.state.todos.map((todo)=>{
+        todo.isDone=newValue;
+        return todo;
+      })
+    })
   }
 
   addTodo = (todo) => {
@@ -25,12 +37,18 @@ export default class Main extends React.Component {
         todos: [...prevState.todos, newTodo],
       };
     });
+    this.setState({isEmpty:false});
   };
 
   delItem = (id) => {
     this.setState({
       todos: this.state.todos.filter((curr) => curr.id !== id),
     });
+    console.log(this.state.todos.length);
+    if(this.state.todos.length===1){
+      this.setState({isEmpty:true});
+      this.setState({selectAll:false});
+    }
   };
 
   checked = (id) => {
@@ -56,7 +74,13 @@ export default class Main extends React.Component {
         }
       }),
     });
+    this.setState({selectAll:false});
+    this.setState({isEmpty: true});
   };
+
+  changeIsEmpty = (newState) => {
+    this.setState({isEmpty:newState})
+  }
 
   render() {
     const { todos, filterMode } = this.state;
@@ -64,7 +88,13 @@ export default class Main extends React.Component {
     return (
       <div className="wrapper">
         <div className="container">
-          <InputField funcAddNewTodo={this.addTodo} />
+          <InputField 
+            funcAddNewTodo={this.addTodo} 
+            changeSelectAllFlag={this.changeSelectAllFlag} 
+            isEmpty={this.state.isEmpty} 
+            changeIsEmpty={this.changeIsEmpty} 
+            selectAllFlag={this.state.selectAll} 
+          />
           <Todos
             todo={todos}
             funcDel={this.delItem}

@@ -5,7 +5,7 @@ export default class InputField extends React.Component {
     super(props);
     this.state = {
       value: "",
-      checkBoxSelectAll: false
+      // checkBoxSelectAll: false
     };
   }
 
@@ -22,20 +22,16 @@ export default class InputField extends React.Component {
     this.setState({ value: v });
   };
 
-  changeCheckBoxSelectAll = (v, e) => {
-    // this.setState({checkBoxSelectAll: v==="on"?true:false})
+  changeCheckBoxSelectAll = () => {
+    this.props.changeSelectAllFlag(!this.props.selectAllFlag);
+    // this.setState({checkBoxSelectAll:!this.state.checkBoxSelectAll});
+  }
 
-    console.log("v is ",v);
-    console.log("e is ", e);
-
-    if(v==="on"){
-      this.setState({checkBoxSelectAll:true})
-    }
-    else{
-      this.setState({checkBoxSelectAll:false})
-    }
-
-    console.log(this.state.checkBoxSelectAll);
+  renderCheckBoxSelectAll = () => {
+    return (this.props.isEmpty?null:<input type="checkbox" className="selectAll" onChange={(e) => this.changeCheckBoxSelectAll()}  
+    // checked={this.state.checkBoxSelectAll}
+    checked={this.props.selectAllFlag}
+  />)
   }
 
   render() {
@@ -43,9 +39,8 @@ export default class InputField extends React.Component {
 
     return (
       <div className="inputFieldWrapper">
-        <input type="checkbox" className="selectAll" onClick={(e) => this.changeCheckBoxSelectAll(e.target.value, e)}  
-          checked={this.state.checkBoxSelectAll}
-        />
+        {this.renderCheckBoxSelectAll()}
+        
         <input
           className="inputField"
           placeholder="Enter task and press Enter"

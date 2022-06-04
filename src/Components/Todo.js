@@ -9,19 +9,16 @@ export default class Item extends React.Component {
   }
 
   mouseIn = () => {
-    // console.log('mouseIn');
     this.setState({mouseIn: true});
   }
   
   mouseOut = () => {
-    // console.log('mouseOut');
     this.setState({mouseIn: false});
   }
 
   renderDelButton = () => {
     const {funcDel, todos} = this.props;
 
-    console.log(this.state.mouseIn);
     return (
       <div className="delButton">
         <div className={this.state.mouseIn?"buttonVisible":"buttonHidden"}>
