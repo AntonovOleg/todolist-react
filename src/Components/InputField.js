@@ -48,9 +48,6 @@ export default class InputField extends React.Component {
             key.keyCode === 13 ? this.click(this.state.value) : null
           }
         />
-        <button className="btnAdd" onClick={() => this.click(value)}>
-          Добавить
-        </button>
       </div>
     );
   }

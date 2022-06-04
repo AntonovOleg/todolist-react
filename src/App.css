@@ -68,6 +68,14 @@
   justify-content: center;
 }
 
+.editTask {
+  padding: 15px;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+}
+
 .captionTask>input {
   width: 100%;
 }

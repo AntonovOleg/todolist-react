@@ -126,6 +126,19 @@ export default class Main extends React.Component {
     }
   }
 
+  changeCaptionTodo = (id,newCaption) => {
+    this.setState({
+      todos: this.state.todos.map((current) => {
+        if(current.id===id){
+          current.todo=newCaption;
+        }
+        return current;
+        
+        // return current.id===id?current.todo=newCaption:null;
+      })
+    })
+  }
+
   render() {
     const { todos, filterMode, visibleButtonClearAll, selectAll, isEmpty } = this.state;
 
@@ -148,6 +161,7 @@ export default class Main extends React.Component {
             filter={filterMode}
             updateVisibleButtonClearAll={this.updateVisibleButtonClearAll}
             updateVisibleCheckBoxSelectAll={this.updateVisibleCheckBoxSelectAll}
+            changeCaptionTodo={this.changeCaptionTodo}
           />
           <Footer
             lengthCount={todos.length}

@@ -4,7 +4,8 @@ export default class Item extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      mouseIn: false
+      mouseIn: false,
+      editable: false
     }
   }
 
@@ -19,6 +20,8 @@ export default class Item extends React.Component {
   renderDelButton = () => {
     const { funcDel, todos } = this.props;
 
+
+
     return (
       <div className="delButton">
         <div className={this.state.mouseIn ? "buttonVisible" : "buttonHidden"}>
@@ -31,8 +34,71 @@ export default class Item extends React.Component {
     )
   }
 
+  funcDoubleClickTodo = (todoId) => {
+    console.log("doubleClick", todoId);
+    this.setState({ editable: !this.state.editable });
+  }
+
+  renderText = () => {
+    const { todos, funcChecked } = this.props;
+
+    return <div className="captionTask"
+      onMouseOut={this.mouseOut}
+      onMouseEnter={this.mouseIn}
+      onClick={() => funcChecked(todos.id)}
+      onDoubleClick={() => this.funcDoubleClickTodo(todos.id)}
+    >
+      {todos.isDone ? (
+        <div className="grayColor"
+          onMouseOut={this.mouseOut}
+          onMouseEnter={this.mouseIn}
+        >
+          <strike>{todos.todo}</strike>
+        </div>
+      ) : (
+        <div>{todos.todo}</div>
+      )}
+    </div>
+  }
+
+  renderEdit = () => {
+    const { todos, funcChecked } = this.props;
+    // console.log('render edit');
+
+    return (
+
+
+      <input
+        type="text"
+        className="editTask"
+        // onMouseOut={this.mouseOut}
+        // onMouseEnter={this.mouseIn}
+        // onClick={() => funcChecked(todos.id)}
+        onDoubleClick={() => this.funcDoubleClickTodo(todos.id)}
+        value={todos.todo}
+        onChange={(e)=>this.props.changeCaptionTodo(todos.id,e.target.value)}
+        // onChange={(e)=>console.log(e)}
+        // onChange={(e)=>console.log(todos)}
+        
+      />
+        
+
+    )
+  }
+
+
+  renderCaption = () => {
+    // const {todos, funcChecked} = this.props;
+
+
+
+    return this.state.editable ? this.renderEdit() : this.renderText();
+
+  }
+
   render() {
     const { isDone, funcChecked, todos, funcDel } = this.props;
+
 
     return (
       <div className="itemWrapper"
@@ -48,22 +114,8 @@ export default class Item extends React.Component {
               onChange={() => funcChecked(todos.id)}
             />
           </div>
-          <div className="captionTask"
-            onMouseOut={this.mouseOut}
-            onMouseEnter={this.mouseIn}
-            onClick={() => funcChecked(todos.id)}
-          >
-            {todos.isDone ? (
-              <div className="grayColor"
-                onMouseOut={this.mouseOut}
-                onMouseEnter={this.mouseIn}
-              >
-                <strike>{todos.todo}</strike>
-              </div>
-            ) : (
-              <div>{todos.todo}</div>
-            )}
-          </div>
+
+          {this.renderCaption()}
           {this.renderDelButton()}
         </div>
       </div>
