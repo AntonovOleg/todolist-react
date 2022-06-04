@@ -24,12 +24,11 @@ export default class InputField extends React.Component {
 
   changeCheckBoxSelectAll = () => {
     this.props.changeSelectAllFlag(!this.props.selectAllFlag);
-    // this.setState({checkBoxSelectAll:!this.state.checkBoxSelectAll});
+
   }
 
   renderCheckBoxSelectAll = () => {
     return (this.props.isEmpty?null:<input type="checkbox" className="selectAll" onChange={(e) => this.changeCheckBoxSelectAll()}  
-    // checked={this.state.checkBoxSelectAll}
     checked={this.props.selectAllFlag}
   />)
   }

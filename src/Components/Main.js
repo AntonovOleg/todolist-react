@@ -10,7 +10,8 @@ export default class Main extends React.Component {
       todos: [],
       filterMode: "All",
       selectAll: false,
-      isEmpty: true
+      isEmpty: true,
+      visibleButtonClearAll: false
     };
   }
 
@@ -22,6 +23,7 @@ export default class Main extends React.Component {
         return todo;
       })
     })
+    this.updateVisibleButtonClearAll();
   }
 
   addTodo = (todo) => {
@@ -38,6 +40,7 @@ export default class Main extends React.Component {
       };
     });
     this.setState({isEmpty:false});
+    this.updateVisibleButtonClearAll();
   };
 
   delItem = (id) => {
@@ -49,6 +52,9 @@ export default class Main extends React.Component {
       this.setState({isEmpty:true});
       this.setState({selectAll:false});
     }
+    //если выполнять сразу, то текущие states не успевают обновиться и 
+    //  updater работает с устаревшими параметрами
+    setTimeout(()=>this.updateVisibleButtonClearAll(),300);
   };
 
   checked = (id) => {
@@ -58,6 +64,7 @@ export default class Main extends React.Component {
         return curr;
       }),
     });
+    this.updateVisibleButtonClearAll();
   };
 
   updateFilterMode = (filterMode) => {
@@ -76,14 +83,28 @@ export default class Main extends React.Component {
     });
     this.setState({selectAll:false});
     this.setState({isEmpty: true});
+    this.updateVisibleButtonClearAll();
+    
+    //если выполнять сразу, то текущие states не успевают обновиться и 
+    //  updater работает с устаревшими параметрами
+    setTimeout(()=>this.updateVisibleButtonClearAll(),300);
   };
 
   changeIsEmpty = (newState) => {
     this.setState({isEmpty:newState})
   }
 
+  updateVisibleButtonClearAll = () => {
+    if(this.state.todos.filter((todo)=>todo.isDone).length===0){
+      this.setState({visibleButtonClearAll:false});
+    }
+    else{
+      this.setState({visibleButtonClearAll:true});
+    }
+  }
+
   render() {
-    const { todos, filterMode } = this.state;
+    const { todos, filterMode, visibleButtonClearAll } = this.state;
 
     return (
       <div className="wrapper">
@@ -100,6 +121,7 @@ export default class Main extends React.Component {
             funcDel={this.delItem}
             funcChecked={this.checked}
             filter={filterMode}
+            updateVisibleButtonClearAll={this.updateVisibleButtonClearAll}
           />
           <Footer
             lengthCount={todos.length}
@@ -107,6 +129,7 @@ export default class Main extends React.Component {
             funcClearCompleted={this.clearCompleted}
             filterMode={filterMode}
             todos={todos}
+            visibleButtonClear={visibleButtonClearAll}
           />
         </div>
       </div>

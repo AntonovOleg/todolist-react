@@ -41,6 +41,22 @@ export default class Footer extends React.Component {
     }
   };
 
+  renderButtonClearCompleted = () => {
+    let currentClassName=`clearCompleted footerButton ${this.props.visibleButtonClear?"":"hidden"}`;
+    console.log(currentClassName);
+    let elem=<div className={currentClassName} onClick={this.clickClearCompleted}>ClearCompleted</div>
+    console.log(elem);
+  //   return (
+  //       // <div className="clearCompleted footerButton" onClick={this.clickClearCompleted}>
+  //         {elem}
+  //         /* {this.props.visibleButtonClear?<div className="visible">ClearCompleted</div>:<div className="hidden">ClearCompleted</div>}
+  //           ClearCompleted */
+  //       // </div>
+
+  // )
+  return elem;
+  }
+
   render() {
     const filterMode = this.props.filterMode;
 
@@ -82,9 +98,8 @@ export default class Footer extends React.Component {
           Completed
         </div>
 
-        <div className="clearCompleted footerButton" onClick={this.clickClearCompleted}>
-          ClearCompleted
-        </div>
+        {/* ButtonClearCompleted */}
+        {this.renderButtonClearCompleted()}
       </div>
     );
   }

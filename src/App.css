@@ -164,3 +164,13 @@
   opacity: 100%;
   transition: 0.5s;
 }
+
+.hidden {
+  opacity: 0%;
+  transition: 0.5s;
+}
+
+.visible {
+  opacity: 100%;
+  transition: 0.5s;
+}
