@@ -63,42 +63,25 @@ export default class Item extends React.Component {
 
   renderEdit = () => {
     const { todos, funcChecked } = this.props;
-    // console.log('render edit');
 
     return (
-
-
       <input
         type="text"
         className="editTask"
-        // onMouseOut={this.mouseOut}
-        // onMouseEnter={this.mouseIn}
-        // onClick={() => funcChecked(todos.id)}
         onDoubleClick={() => this.funcDoubleClickTodo(todos.id)}
         value={todos.todo}
-        onChange={(e)=>this.props.changeCaptionTodo(todos.id,e.target.value)}
-        // onChange={(e)=>console.log(e)}
-        // onChange={(e)=>console.log(todos)}
-        
+        onChange={(e) => this.props.changeCaptionTodo(todos.id, e.target.value)}
       />
-        
-
     )
   }
 
 
   renderCaption = () => {
-    // const {todos, funcChecked} = this.props;
-
-
-
     return this.state.editable ? this.renderEdit() : this.renderText();
-
   }
 
   render() {
     const { isDone, funcChecked, todos, funcDel } = this.props;
-
 
     return (
       <div className="itemWrapper"
@@ -114,7 +97,6 @@ export default class Item extends React.Component {
               onChange={() => funcChecked(todos.id)}
             />
           </div>
-
           {this.renderCaption()}
           {this.renderDelButton()}
         </div>

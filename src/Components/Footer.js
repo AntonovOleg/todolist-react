@@ -22,12 +22,12 @@ export default class Footer extends React.Component {
 
     // Новый режим, при котором отображается количество незавершенных заданий
     return todos.filter((curr) => {
-            if (!curr.isDone) {
-              return curr;
-            } else {
-              return;
-            }
-          }).length;
+      if (!curr.isDone) {
+        return curr;
+      } else {
+        return;
+      }
+    }).length;
 
     // Преждний режим, при котором отображалось количесвто items 
     //  при текущем фильтре

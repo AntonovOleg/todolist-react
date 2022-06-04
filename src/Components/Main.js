@@ -43,7 +43,7 @@ export default class Main extends React.Component {
     });
     this.setState({ isEmpty: false });
     this.updateVisibleButtonClearAll();
-    setTimeout(()=>this.updateVisibleCheckBoxSelectAll(),300);
+    setTimeout(() => this.updateVisibleCheckBoxSelectAll(), 300);
   };
 
   delItem = (id) => {
@@ -79,16 +79,10 @@ export default class Main extends React.Component {
 
   updateVisibleCheckBoxSelectAll = () => {
     if (this.state.todos.length > 0) {
-      console.log("todos length",this.state.todos.length);
-      console.log("todos");
-      console.log(this.state.todos);
-      this.setState({visibleCheckBoxSelectAll:true});
-      console.log("visibleCheckboxSelectAll",this.state.visibleCheckBoxSelectAll);
-    }else{
-      console.log("todos length",this.state.todos.length);
-      console.log("todos");
-      console.log(this.state.todos);
-      this.setState({visibleCheckBoxSelectAll:false})
+      this.setState({ visibleCheckBoxSelectAll: true });
+      console.log("visibleCheckboxSelectAll", this.state.visibleCheckBoxSelectAll);
+    } else {
+      this.setState({ visibleCheckBoxSelectAll: false })
     }
   }
 
@@ -126,14 +120,14 @@ export default class Main extends React.Component {
     }
   }
 
-  changeCaptionTodo = (id,newCaption) => {
+  changeCaptionTodo = (id, newCaption) => {
     this.setState({
       todos: this.state.todos.map((current) => {
-        if(current.id===id){
-          current.todo=newCaption;
+        if (current.id === id) {
+          current.todo = newCaption;
         }
         return current;
-        
+
         // return current.id===id?current.todo=newCaption:null;
       })
     })

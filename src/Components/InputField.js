@@ -37,7 +37,7 @@ export default class InputField extends React.Component {
 
     return (
       <div className="inputFieldWrapper">
-        {this.props.visibleCheckBoxSelectAll?this.renderCheckBoxSelectAll():null}
+        {this.props.visibleCheckBoxSelectAll ? this.renderCheckBoxSelectAll() : null}
 
         <input
           className="inputField"
