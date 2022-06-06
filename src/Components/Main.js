@@ -2,6 +2,7 @@ import React from "react";
 import InputField from "./InputField.js";
 import Todos from "./Todos.js";
 import Footer from "./Footer.js";
+import Debug from "./debug.js";
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -66,6 +67,7 @@ export default class Main extends React.Component {
     this.setState({
       todos: this.state.todos.map((curr) => {
         if (curr.id === id) curr.isDone = !curr.isDone;
+        if (!curr.isDone) this.setState({ selectAll: false });
         return curr;
       }),
     });
@@ -74,6 +76,7 @@ export default class Main extends React.Component {
 
   updateFilterMode = (filterMode) => {
     this.setState({ filterMode: filterMode });
+    this.setLocalStorage();
   };
 
   updateVisibleCheckBoxSelectAll = () => {
@@ -126,6 +129,27 @@ export default class Main extends React.Component {
     });
   };
 
+  setLocalStorage = () => {
+    localStorage.setItem("todos", JSON.stringify(this.state.todos));
+    localStorage.setItem(
+      "visibleCheckBoxSelectAll",
+      this.state.visibleCheckBoxSelectAll
+    );
+    localStorage.setItem("selectAll", this.state.selectAll);
+  };
+
+  loadLocalStorage = () => {
+    if (localStorage.getItem("todos")) {
+      this.setState({ todos: JSON.parse(localStorage.getItem("todos")) });
+      this.setState({
+        visibleCheckBoxSelectAll: localStorage.getItem(
+          "visibleCheckBoxSelectAll"
+        ),
+      });
+      this.setState({ selectAll: localStorage.getItem("selectAll") });
+    }
+  };
+
   render() {
     const {
       todos,
@@ -157,6 +181,7 @@ export default class Main extends React.Component {
             updateVisibleCheckBoxSelectAll={this.updateVisibleCheckBoxSelectAll}
             changeCaptionTodo={this.changeCaptionTodo}
           />
+
           <Footer
             lengthCount={todos.length}
             funcUpdateFilterMode={this.updateFilterMode}
