@@ -2,20 +2,28 @@ import React from "react";
 import Item from "./Todo.js";
 export default class Todos extends React.Component {
   checkFilter = (isDone, item) => {
+    const {
+      funcDel,
+      funcChecked,
+      updateVisibleButtonClearAll,
+      updateVisibleCheckBoxSelectAll,
+      changeCaptionTodo,
+      filter,
+    } = this.props;
     const elem = (
       <Item
         todos={item}
         key={item.id}
-        funcDel={this.props.funcDel}
-        funcChecked={this.props.funcChecked}
+        funcDel={funcDel}
+        funcChecked={funcChecked}
         isDone={item.isDone}
-        updateVisibleButtonClearAll={this.props.updateVisibleButtonClearAll}
-        updateVisibleCheckBoxSelectAll={this.props.updateVisibleCheckBoxSelectAll}
-        changeCaptionTodo={this.props.changeCaptionTodo}
+        updateVisibleButtonClearAll={updateVisibleButtonClearAll}
+        updateVisibleCheckBoxSelectAll={updateVisibleCheckBoxSelectAll}
+        changeCaptionTodo={changeCaptionTodo}
       />
     );
 
-    switch (this.props.filter) {
+    switch (filter) {
       case "All":
         return elem;
         break;

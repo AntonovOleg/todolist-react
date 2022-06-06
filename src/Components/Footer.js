@@ -29,7 +29,7 @@ export default class Footer extends React.Component {
       }
     }).length;
 
-    // Преждний режим, при котором отображалось количесвто items 
+    // Преждний режим, при котором отображалось количесвто items
     //  при текущем фильтре
 
     // switch (filterMode) {
@@ -61,10 +61,16 @@ export default class Footer extends React.Component {
   };
 
   renderButtonClearCompleted = () => {
-    let currentClassName = `clearCompleted footerButton ${this.props.visibleButtonClear ? "visible" : "hidden"}`;
-    let elem = <div className={currentClassName} onClick={this.clickClearCompleted}>ClearCompleted</div>
+    let currentClassName = `clearCompleted footerButton ${
+      this.props.visibleButtonClear ? "visible" : "hidden"
+    }`;
+    let elem = (
+      <div className={currentClassName} onClick={this.clickClearCompleted}>
+        ClearCompleted
+      </div>
+    );
     return elem;
-  }
+  };
 
   render() {
     const filterMode = this.props.filterMode;
