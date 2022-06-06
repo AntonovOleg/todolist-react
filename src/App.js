@@ -1,7 +1,6 @@
-import logo from "./logo.svg";
 import "./App.css";
 import Main from "./Components/Main.js";
-import Todos from "./Components/Todos.js";
+import React from "react";
 
 function App() {
   return (

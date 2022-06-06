@@ -66,7 +66,7 @@ export default class Item extends React.Component {
   };
 
   renderEdit = () => {
-    const { todos, funcChecked } = this.props;
+    const { todos } = this.props;
 
     return (
       <input
@@ -84,7 +84,7 @@ export default class Item extends React.Component {
   };
 
   render() {
-    const { isDone, funcChecked, todos, funcDel } = this.props;
+    const { isDone, funcChecked, todos } = this.props;
 
     return (
       <div

@@ -88,7 +88,7 @@ export default class Main extends React.Component {
     this.setState({
       todos: this.state.todos.filter((task) => {
         if (task.isDone) {
-          return;
+          return null;
         } else {
           return task;
         }

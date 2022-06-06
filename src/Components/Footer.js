@@ -18,14 +18,14 @@ export default class Footer extends React.Component {
   };
 
   getCount = () => {
-    const { filterMode, lengthCount, todos } = this.props;
+    const { todos } = this.props;
 
     // Новый режим, при котором отображается количество незавершенных заданий
     return todos.filter((curr) => {
       if (!curr.isDone) {
         return curr;
       } else {
-        return;
+        return null;
       }
     }).length;
 
