@@ -25,12 +25,10 @@ export default class InputField extends React.Component {
   changeCheckBoxSelectAll = () => {
     const {
       changeSelectAllFlag,
-      updateVisibleCheckBoxSelectAll,
       selectAllFlag,
     } = this.props;
 
     changeSelectAllFlag(!selectAllFlag);
-    updateVisibleCheckBoxSelectAll();
   };
 
   renderCheckBoxSelectAll = () => {

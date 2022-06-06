@@ -11,8 +11,6 @@ export default class Main extends React.Component {
       filterMode: "All",
       selectAll: false,
       isEmpty: true,
-      visibleButtonClearAll: false,
-      visibleCheckBoxSelectAll: false,
     };
   }
 
@@ -52,8 +50,6 @@ export default class Main extends React.Component {
       this.setState({ isEmpty: true });
       this.setState({ selectAll: false });
     }
-    this.updateVisibleButtonClearAll();
-    this.updateVisibleCheckBoxSelectAll();
   };
 
   checked = (id) => {
@@ -64,19 +60,10 @@ export default class Main extends React.Component {
         return curr;
       }),
     });
-    this.updateVisibleButtonClearAll();
   };
 
   updateFilterMode = (filterMode) => {
     this.setState({ filterMode: filterMode });
-  };
-
-  updateVisibleCheckBoxSelectAll = () => {
-    if (this.state.todos.length > 0) {
-      this.setState({ visibleCheckBoxSelectAll: true });
-    } else {
-      this.setState({ visibleCheckBoxSelectAll: false });
-    }
   };
 
   clearCompleted = () => {
@@ -98,14 +85,6 @@ export default class Main extends React.Component {
 
   changeIsEmpty = (newState) => {
     this.setState({ isEmpty: newState });
-  };
-
-  updateVisibleButtonClearAll = () => {
-    if (this.state.todos.filter((todo) => todo.isDone).length === 0) {
-      this.setState({ visibleButtonClearAll: false });
-    } else {
-      this.setState({ visibleButtonClearAll: true });
-    }
   };
 
   changeCaptionTodo = (id, newCaption) => {
@@ -130,9 +109,17 @@ export default class Main extends React.Component {
     } = this.state;
 
     const filteredTodos = todos.filter((curr) => {
-      if (filterMode === "All") return true;
-      if (filterMode === "Active") return !curr.isDone;
-      if (filterMode === "Completed") return curr.isDone;
+      switch (filterMode) {
+        case "All":
+          return true;
+        case "Active":
+          return !curr.isDone;
+        case "Completed":
+          return curr.isDone;
+        default:
+          alert("Непредвиденная ошибка в соствлении фильтрованных значений");
+          break;
+      }
     });
 
     return (

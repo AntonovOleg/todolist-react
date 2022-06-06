@@ -5,8 +5,6 @@ export default class Todos extends React.Component {
     const {
       funcDel,
       funcChecked,
-      updateVisibleButtonClearAll,
-      updateVisibleCheckBoxSelectAll,
       changeCaptionTodo,
       filteredTodos,
     } = this.props;
@@ -18,8 +16,6 @@ export default class Todos extends React.Component {
         funcDel={funcDel}
         funcChecked={funcChecked}
         isDone={item.isDone}
-        updateVisibleButtonClearAll={updateVisibleButtonClearAll}
-        updateVisibleCheckBoxSelectAll={updateVisibleCheckBoxSelectAll}
         changeCaptionTodo={changeCaptionTodo}
       />
     );
