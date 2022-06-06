@@ -1,10 +1,11 @@
 .wrapper {
-  background-color: rgb(167, 167, 167);
+  background-color: rgb(241, 241, 241);
   min-height: 1000px;
 }
 
 .container {
-  background-color: rgb(242, 255, 212);
+  background-color: rgb(247, 255, 228);
+  border: 1px solid black;
   width: 70%;
   margin: auto;
   min-height: 500px;
@@ -13,7 +14,6 @@
 .inputFieldWrapper {
   width: 90%;
   margin: auto;
-  text-align: center;
 }
 
 .inputField {
@@ -112,9 +112,10 @@
 }
 
 .filterSelected {
-  background-color: rgb(233, 253, 220);
+  background-color: rgba(102, 255, 0, 0.76);
   border-radius: 35%;
   border: 2px solid gray;
+  transition: 0.5s;
 }
 
 .clearCompleted {

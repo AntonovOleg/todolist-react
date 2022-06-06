@@ -1,4 +1,5 @@
 import React from "react";
+import BtnClearAll from "./BtnClearCompleted";
 
 export default class Footer extends React.Component {
   clickAll = () => {
@@ -20,7 +21,6 @@ export default class Footer extends React.Component {
   getCount = () => {
     const { todos } = this.props;
 
-    // Новый режим, при котором отображается количество незавершенных заданий
     return todos.filter((curr) => {
       if (!curr.isDone) {
         return curr;
@@ -28,52 +28,10 @@ export default class Footer extends React.Component {
         return null;
       }
     }).length;
-
-    // Преждний режим, при котором отображалось количесвто items
-    //  при текущем фильтре
-
-    // switch (filterMode) {
-    //   case "All":
-    //     // return lengthCount;
-    //     // break;
-    //   case "Active":
-    //     return todos.filter((curr) => {
-    //       if (!curr.isDone) {
-    //         return curr;
-    //       } else {
-    //         return;
-    //       }
-    //     }).length;
-    //     break;
-    //   // case "Completed":
-    //   //   return todos.filter((curr) => {
-    //   //     if (curr.isDone) {
-    //   //       return curr;
-    //   //     } else {
-    //   //       return;
-    //   //     }
-    //   //   }).length;
-    //   //   break;
-    //   default:
-    //     alert("Непредвиденная ошибка");
-    //     break;
-    // }
-  };
-
-  renderButtonClearCompleted = () => {
-    let currentClassName = `clearCompleted footerButton ${
-      this.props.visibleButtonClear ? "visible" : "hidden"
-    }`;
-    let elem = (
-      <div className={currentClassName} onClick={this.clickClearCompleted}>
-        ClearCompleted
-      </div>
-    );
-    return elem;
   };
 
   render() {
-    const filterMode = this.props.filterMode;
+    const {filterMode, visibleButtonClear, todos} = this.props;
 
     return (
       <div className="footer">
@@ -114,7 +72,11 @@ export default class Footer extends React.Component {
         </div>
 
         {/* ButtonClearCompleted */}
-        {this.renderButtonClearCompleted()}
+        <BtnClearAll
+          clickClearCompleted={this.clickClearCompleted}
+          visibleButtonClear={visibleButtonClear}
+          todos={todos}
+        />
       </div>
     );
   }

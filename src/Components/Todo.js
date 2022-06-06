@@ -66,7 +66,7 @@ export default class Item extends React.Component {
   };
 
   renderEdit = () => {
-    const { todos } = this.props;
+    const { todos, changeCaptionTodo } = this.props;
 
     return (
       <input
@@ -74,7 +74,7 @@ export default class Item extends React.Component {
         className="editTask"
         onDoubleClick={() => this.funcDoubleClickTodo(todos.id)}
         value={todos.todo}
-        onChange={(e) => this.props.changeCaptionTodo(todos.id, e.target.value)}
+        onChange={(e) => changeCaptionTodo(todos.id, e.target.value)}
       />
     );
   };

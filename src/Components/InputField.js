@@ -1,4 +1,5 @@
 import React from "react";
+import CheckBoxSelectAll from "./CheckBoxSelectAll.js";
 
 export default class InputField extends React.Component {
   constructor(props) {
@@ -33,9 +34,10 @@ export default class InputField extends React.Component {
   };
 
   renderCheckBoxSelectAll = () => {
-    const { visibleCheckBoxSelectAll, selectAllFlag } = this.props;
+    const { selectAllFlag, todos } = this.props;
+    const hide = todos.length === 0;
 
-    return !visibleCheckBoxSelectAll ? null : (
+    return hide ? null : (
       <input
         type="checkbox"
         className="selectAll"
@@ -50,9 +52,10 @@ export default class InputField extends React.Component {
 
     return (
       <div className="inputFieldWrapper">
-        {this.props.visibleCheckBoxSelectAll
-          ? this.renderCheckBoxSelectAll()
-          : null}
+        <CheckBoxSelectAll
+          todos={this.props.todos}
+          changeCheckBoxSelectAll={this.changeCheckBoxSelectAll}
+        />
 
         <input
           className="inputField"

@@ -2,7 +2,6 @@ import React from "react";
 import InputField from "./InputField.js";
 import Todos from "./Todos.js";
 import Footer from "./Footer.js";
-import Debug from "./debug.js";
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -25,8 +24,6 @@ export default class Main extends React.Component {
         return todo;
       }),
     });
-    this.updateVisibleButtonClearAll();
-    this.updateVisibleCheckBoxSelectAll();
   };
 
   addTodo = (todo) => {
@@ -43,8 +40,6 @@ export default class Main extends React.Component {
       };
     });
     this.setState({ isEmpty: false });
-    this.updateVisibleButtonClearAll();
-    setTimeout(() => this.updateVisibleCheckBoxSelectAll(), 300);
   };
 
   delItem = (id) => {
@@ -57,10 +52,8 @@ export default class Main extends React.Component {
       this.setState({ isEmpty: true });
       this.setState({ selectAll: false });
     }
-    //если выполнять сразу, то текущие states не успевают обновиться и
-    //  updater работает с устаревшими параметрами
-    setTimeout(() => this.updateVisibleButtonClearAll(), 300);
-    setTimeout(() => this.updateVisibleCheckBoxSelectAll(), 300);
+    this.updateVisibleButtonClearAll();
+    this.updateVisibleCheckBoxSelectAll();
   };
 
   checked = (id) => {
@@ -76,7 +69,6 @@ export default class Main extends React.Component {
 
   updateFilterMode = (filterMode) => {
     this.setState({ filterMode: filterMode });
-    this.setLocalStorage();
   };
 
   updateVisibleCheckBoxSelectAll = () => {
@@ -88,22 +80,20 @@ export default class Main extends React.Component {
   };
 
   clearCompleted = () => {
-    this.setState({
-      todos: this.state.todos.filter((task) => {
-        if (task.isDone) {
-          return null;
-        } else {
-          return task;
-        }
-      }),
+    this.setState((state) => {
+      return {
+        todos: this.state.todos.filter((task) => {
+          if (task.isDone) {
+            return null;
+          } else {
+            return task;
+          }
+        }),
+      };
     });
-    this.setState({ selectAll: false });
-    this.updateVisibleButtonClearAll();
-
-    //если выполнять сразу, то текущие states не успевают обновиться и
-    //  updater работает с устаревшими параметрами
-    setTimeout(() => this.updateVisibleButtonClearAll(), 300);
-    setTimeout(() => this.updateVisibleCheckBoxSelectAll(), 500);
+    this.setState((state) => {
+      return { selectAll: false };
+    });
   };
 
   changeIsEmpty = (newState) => {
@@ -129,27 +119,6 @@ export default class Main extends React.Component {
     });
   };
 
-  setLocalStorage = () => {
-    localStorage.setItem("todos", JSON.stringify(this.state.todos));
-    localStorage.setItem(
-      "visibleCheckBoxSelectAll",
-      this.state.visibleCheckBoxSelectAll
-    );
-    localStorage.setItem("selectAll", this.state.selectAll);
-  };
-
-  loadLocalStorage = () => {
-    if (localStorage.getItem("todos")) {
-      this.setState({ todos: JSON.parse(localStorage.getItem("todos")) });
-      this.setState({
-        visibleCheckBoxSelectAll: localStorage.getItem(
-          "visibleCheckBoxSelectAll"
-        ),
-      });
-      this.setState({ selectAll: localStorage.getItem("selectAll") });
-    }
-  };
-
   render() {
     const {
       todos,
@@ -159,6 +128,12 @@ export default class Main extends React.Component {
       isEmpty,
       visibleCheckBoxSelectAll,
     } = this.state;
+
+    const filteredTodos = todos.filter((curr) => {
+      if (filterMode === "All") return true;
+      if (filterMode === "Active") return !curr.isDone;
+      if (filterMode === "Completed") return curr.isDone;
+    });
 
     return (
       <div className="wrapper">
@@ -171,6 +146,7 @@ export default class Main extends React.Component {
             selectAllFlag={selectAll}
             visibleCheckBoxSelectAll={visibleCheckBoxSelectAll}
             updateVisibleCheckBoxSelectAll={this.updateVisibleCheckBoxSelectAll}
+            todos={todos}
           />
           <Todos
             todo={todos}
@@ -180,6 +156,7 @@ export default class Main extends React.Component {
             updateVisibleButtonClearAll={this.updateVisibleButtonClearAll}
             updateVisibleCheckBoxSelectAll={this.updateVisibleCheckBoxSelectAll}
             changeCaptionTodo={this.changeCaptionTodo}
+            filteredTodos={filteredTodos}
           />
 
           <Footer
@@ -189,6 +166,7 @@ export default class Main extends React.Component {
             filterMode={filterMode}
             todos={todos}
             visibleButtonClear={visibleButtonClearAll}
+            filteredTodos={filteredTodos}
           />
         </div>
       </div>
