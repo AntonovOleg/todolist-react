@@ -1,4 +1,5 @@
 import React from "react";
+import BtnClearAll from "./BtnClearCompleted";
 
 export default class Footer extends React.Component {
   clickAll = () => {
@@ -18,31 +19,19 @@ export default class Footer extends React.Component {
   };
 
   getCount = () => {
-    const { filterMode, lengthCount, todos } = this.props;
+    const { todos } = this.props;
 
-    if (filterMode === "All") {
-      return lengthCount;
-    } else if (filterMode === "Active") {
-      return todos.filter((curr) => {
-        if (!curr.isDone) {
-          return curr;
-        } else {
-          return;
-        }
-      }).length;
-    } else if (filterMode === "Completed") {
-      return todos.filter((curr) => {
-        if (curr.isDone) {
-          return curr;
-        } else {
-          return;
-        }
-      }).length;
-    }
+    return todos.filter((curr) => {
+      if (!curr.isDone) {
+        return curr;
+      } else {
+        return null;
+      }
+    }).length;
   };
 
   render() {
-    const filterMode = this.props.filterMode;
+    const {filterMode, visibleButtonClear, todos} = this.props;
 
     return (
       <div className="footer">
@@ -62,8 +51,8 @@ export default class Footer extends React.Component {
         <div
           className={
             filterMode === "Active"
-              ? "filterActive filterSelected"
-              : "filterActive"
+              ? "filterActive filterSelected footerButton"
+              : "filterActive footerButton"
           }
           onClick={this.clickActive}
         >
@@ -74,17 +63,20 @@ export default class Footer extends React.Component {
         <div
           className={
             filterMode === "Completed"
-              ? "filterCompleted filterSelected"
-              : "filterCompleted"
+              ? "filterCompleted filterSelected footerButton"
+              : "filterCompleted footerButton"
           }
           onClick={this.clickCompleted}
         >
           Completed
         </div>
 
-        <div className="clearCompleted" onClick={this.clickClearCompleted}>
-          ClearCompleted
-        </div>
+        {/* ButtonClearCompleted */}
+        <BtnClearAll
+          clickClearCompleted={this.clickClearCompleted}
+          visibleButtonClear={visibleButtonClear}
+          todos={todos}
+        />
       </div>
     );
   }

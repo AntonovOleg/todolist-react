@@ -1,4 +1,5 @@
 import React from "react";
+import CheckBoxSelectAll from "./CheckBoxSelectAll.js";
 
 export default class InputField extends React.Component {
   constructor(props) {
@@ -17,8 +18,31 @@ export default class InputField extends React.Component {
     }
   };
 
-  change = (v) => {
+  changeInput = (v) => {
     this.setState({ value: v });
+  };
+
+  changeCheckBoxSelectAll = () => {
+    const {
+      changeSelectAllFlag,
+      selectAllFlag,
+    } = this.props;
+
+    changeSelectAllFlag(!selectAllFlag);
+  };
+
+  renderCheckBoxSelectAll = () => {
+    const { selectAllFlag, todos } = this.props;
+    const hide = todos.length === 0;
+
+    return hide ? null : (
+      <input
+        type="checkbox"
+        className="selectAll"
+        onChange={(e) => this.changeCheckBoxSelectAll()}
+        checked={selectAllFlag}
+      />
+    );
   };
 
   render() {
@@ -26,18 +50,18 @@ export default class InputField extends React.Component {
 
     return (
       <div className="inputFieldWrapper">
+        <CheckBoxSelectAll
+          todos={this.props.todos}
+          changeCheckBoxSelectAll={this.changeCheckBoxSelectAll}
+        />
+
         <input
           className="inputField"
           placeholder="Enter task and press Enter"
-          onChange={(e) => this.change(e.target.value)}
+          onChange={(e) => this.changeInput(e.target.value)}
           value={value}
-          onKeyDown={(key) =>
-            key.keyCode === 13 ? this.click(this.state.value) : null
-          }
+          onKeyDown={(key) => (key.keyCode === 13 ? this.click(value) : null)}
         />
-        <button className="btnAdd" onClick={() => this.click(value)}>
-          Добавить
-        </button>
       </div>
     );
   }
