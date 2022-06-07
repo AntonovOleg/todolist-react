@@ -68,6 +68,8 @@ export default class Main extends React.Component {
   clearCompleted = () => {
     this.setState((state) => {
       return {
+        ...state,
+        selectAll: false,
         todos: this.state.todos.filter((task) => {
           if (task.isDone) {
             return null;
@@ -76,9 +78,6 @@ export default class Main extends React.Component {
           }
         }),
       };
-    });
-    this.setState((state) => {
-      return { selectAll: false };
     });
   };
 
