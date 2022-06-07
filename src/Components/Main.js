@@ -15,8 +15,8 @@ export default class Main extends React.Component {
   }
 
   changeSelectAllFlag = (newValue) => {
-    this.setState({ selectAll: newValue });
     this.setState({
+      selectAll: newValue,
       todos: this.state.todos.map((todo) => {
         todo.isDone = newValue;
         return todo;
@@ -47,8 +47,7 @@ export default class Main extends React.Component {
       todos: todos.filter((curr) => curr.id !== id),
     });
     if (todos.length === 1) {
-      this.setState({ isEmpty: true });
-      this.setState({ selectAll: false });
+      this.setState({ isEmpty: true, selectAll: false });
     }
   };
 
